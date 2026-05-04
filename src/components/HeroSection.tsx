@@ -1,43 +1,51 @@
-import heroBg from "@/assets/hero-bg.jpg";
+import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      <img
-        src={heroBg}
-        alt="Teyvat landscape"
-        width={1920}
-        height={1080}
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background" />
-
-      <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-        <p className="text-genshin-gold tracking-[0.3em] uppercase text-sm mb-4 animate-glow-pulse">
-          Guia do Viajante
-        </p>
-        <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight mb-6">
-          Genshin <span className="text-genshin-gold">Impact</span>
-        </h1>
-        <p className="text-muted-foreground text-lg md:text-xl max-w-xl mx-auto mb-10">
-          Tudo o que você precisa saber para começar sua jornada por Teyvat.
-          Elementos, combate, exploração e muito mais.
-        </p>
-        <a
-          href="#combate"
-          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-2xl font-semibold text-lg hover:brightness-110 transition-all shadow-[0_0_30px_var(--genshin-gold-dim)]"
-        >
-          Começar Aventura
-        </a>
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute inset-0">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-[100px]" />
       </div>
 
-      <a
-        href="#combate"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-genshin-gold animate-float"
-      >
-        <ChevronDown size={32} />
-      </a>
+      <div className="relative z-10 text-center px-4">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-primary text-sm tracking-[0.3em] uppercase mb-4"
+        >
+          Genshin Impact
+        </motion.p>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.7 }}
+          className="text-5xl md:text-7xl font-bold font-display mb-6 leading-tight"
+        >
+          Guia do <br />
+          <span className="text-primary">Viajante</span>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="text-muted-foreground max-w-md mx-auto text-lg mb-12"
+        >
+          Conheça os personagens lendários de Teyvat e seus poderes elementais.
+        </motion.p>
+
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+        >
+          <ChevronDown size={32} className="mx-auto text-muted-foreground/50" />
+        </motion.div>
+      </div>
     </section>
   );
 }
