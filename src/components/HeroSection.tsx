@@ -1,27 +1,22 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-// Adições conforme o roteiro (Passo 3 - Importar funções) [cite: 114, 115, 116]
 import { useEffect, useState } from "react";
 import { fetchPagina } from "../utils/fetchPagina";
 import { parseContent } from "../utils/parseContent";
 
-// Adição conforme o roteiro (Passo 3 - Definir tipo Conteudo) [cite: 149]
 type Conteudo = ReturnType<typeof parseContent>;
 
 export default function HeroSection() {
-  // Adição conforme o roteiro (Passo 3 - Declarar estado) [cite: 153]
   const [conteudo, setConteudo] = useState<Conteudo | null>(null);
 
-  // Adição conforme o roteiro (Passo 3 - useEffect para buscar dados) [cite: 154, 155]
   useEffect(() => {
-    fetchPagina("pagina-1") // Slug da página no WordPress [cite: 155]
+    fetchPagina("pagina-1") 
       .then(pagina => {
-        // Separa o HTML em arrays de parágrafos, títulos, etc [cite: 159]
         const elementos = parseContent(pagina.content.rendered);
         setConteudo(elementos);
       })
       .catch(() => {
-        console.warn("Não foi possível buscar o conteúdo do WordPress."); 
+        console.warn("Não foi possível buscar o conteúdo do WordPress.");
       });
   }, []);
 
@@ -39,7 +34,6 @@ export default function HeroSection() {
           transition={{ delay: 0.2 }}
           className="text-primary text-sm tracking-[0.3em] uppercase mb-4"
         >
-          {/* Acessa o primeiro parágrafo do WP [cite: 184] */}
           {conteudo?.paragrafos[0]?.textContent || "Genshin Impact"}
         </motion.p>
 
@@ -49,7 +43,6 @@ export default function HeroSection() {
           transition={{ delay: 0.4, duration: 0.7 }}
           className="text-5xl md:text-7xl font-bold font-display mb-6 leading-tight"
         >
-          {/* Acessa os títulos do WP [cite: 182] */}
           {conteudo?.titulos[0]?.textContent || "Guia do"} <br />
           <span className="text-primary">
             {conteudo?.titulos[1]?.textContent || "Viajante"}
@@ -62,7 +55,6 @@ export default function HeroSection() {
           transition={{ delay: 0.8 }}
           className="text-muted-foreground max-w-md mx-auto text-lg mb-12"
         >
-          {/* Acessa o segundo parágrafo do WP [cite: 184] */}
           {conteudo?.paragrafos[1]?.textContent || "Conheça os personagens lendários de Teyvat e seus poderes elementais."}
         </motion.p>
 
