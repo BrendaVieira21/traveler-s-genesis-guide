@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import CharacterCard from "@/components/CharacterCard";
+import ClickButton from "@/components/ClickButton";
 import { characters, regions } from "@/data/characters";
 
 function App() {
